@@ -1,0 +1,30 @@
+<app-header></app-header>
+<div id="wrapper" class="clearfix expand">
+
+    <app-menu></app-menu>
+
+    <div id="content" class="right">
+
+        <div class="breadcrumbs clearfix">
+            <ul class="breadcrumbs left">
+                <li><i class="fa fa-angle-right"></i></li>
+                <li>{{routeDisplay}}</li>
+            </ul>
+        </div>
+
+        <router-outlet></router-outlet>
+
+        <div class="users">
+            <div class="clearfix">
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>MADE BY SAMI ARABI</p>
+        </div>
+    </footer>
+
+</div>

@@ -1,0 +1,19 @@
+{
+    "/employes/*" : {
+        "target" : "http://192.168.99.100:8761",
+        "secure" : false,
+        "logLevel" : "debug"
+    },"/mails/*" : {
+        "target" : "http://192.168.99.100:8761",
+        "secure" : false,
+        "logLevel" : "debug"
+    },"/absences/*" : {
+        "target" : "http://192.168.99.100:8761",
+        "secure" : false,
+        "logLevel" : "debug"
+    },"/conges/*" : {
+        "target" : "http://192.168.99.100:8761",
+        "secure" : false,
+        "logLevel" : "debug"
+    }
+}

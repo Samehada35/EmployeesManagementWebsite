@@ -1,0 +1,17 @@
+<div class="charts">
+    <div class="heading clearfix">
+        <h2><i class="fa fa-pie-chart"></i>STATISTIQUE :</h2>
+        <select class="chart-select" data-placeholder="SELECT CHART" style="width: 175px" [(ngModel)]="selectedStat" (change)="showGraph()">
+            <option value="stat1">Distribution etats</option>
+            <option value="stat2">Distribution sexes</option>
+            <option value="stat3">Distribution ages</option>
+            <option value="stat4">Distribution départements</option>
+        </select>
+    </div>
+
+    <table class="adm-table">
+        <div id="canvas-container">
+            <canvas id="chart"></canvas>
+        </div>
+    </table>
+</div>

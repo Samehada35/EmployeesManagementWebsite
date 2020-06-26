@@ -1,0 +1,24 @@
+spring:
+    freemarker:
+        template-loader-path: classpath:/templates/
+        prefer-file-system-access: false
+    data:
+        mongodb:
+            uri : mongodb://root:root@api-database:27017/employe_db?authSource=admin&authMechanism=SCRAM-SHA-1
+        repositories:
+            enabled : true
+    rabbitmq:
+        host: 192.168.99.100
+        port: 5672
+        username : guest
+        password : guest
+server:
+    port: 8761
+
+eureka:
+    client:
+        serviceUrl:
+            defaultZone: http://192.168.99.100:9102/eureka/
+logging:
+    level:
+        ROOT: DEBUG

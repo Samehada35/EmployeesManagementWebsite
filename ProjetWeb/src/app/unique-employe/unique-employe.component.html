@@ -1,0 +1,39 @@
+<div>
+    <table class="adm-table">
+        <tr>
+            <td><img src="assets/images/avatar{{employe['sexe']=='HOMME'?1:2}}.jpg" alt="img" class="avatar"></td>
+            <td>
+                <p>{{employe["nomEmp"]+" "+employe["prenomEmp"]}}</p>
+            </td>
+            <td>Recruté le{{employe["date_recrutement"]["jour"]+"/"+employe["date_recrutement"]["mois"]+"/"+employe["date_recrutement"]["annee"]}}</td>
+            <td>
+                Matricule : {{employe["matricule"]}}
+            </td>
+        </tr>
+         <tr>
+             <td></td>
+            <td>
+                Date de naissance : {{employe["date_naissance"]["jour"]+"/"+employe["date_naissance"]["mois"]+"/"+employe["date_naissance"]["annee"]}}
+            </td>
+            <td>
+                Lieu de naissance : {{employe["lieuNaissance"]}} 
+            </td>
+            <td>
+                Adresse : {{employe["adresse"]["numRue"]+" "+employe["adresse"]["nomRue"]+", "+employe["adresse"]["codePostal"]+", "+employe["adresse"]["ville"]}}
+            </td>
+        </tr>
+         <tr>
+             <td></td>
+            <td>
+                Fonction : {{employe["fonction"]}}
+            </td>
+            <td>
+                Grade : {{employe["grade"]}} 
+            </td>
+            <td>
+                Departement : {{employe["departement"]}}
+            </td>
+        </tr>
+    </table>
+    <input class="btn" type="button" value="Revenir a la liste des employes" style="margin-left: 10px" routerLink="/employees-management"/>
+</div>

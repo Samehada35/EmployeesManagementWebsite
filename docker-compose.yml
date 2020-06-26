@@ -1,0 +1,46 @@
+version: "3"
+services:
+  api-database:
+    image: mongo:4.0
+    ports:
+    - 27017:27017
+    command: --smallfiles
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    volumes:
+    - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+  eureka-server:
+    image : serveur_eureka
+    ports:
+    - 9102:9102
+  web-service:
+    image: gestion_personnel
+    ports:
+    - 8761:8761
+    links:
+    - api-database
+    - rabbitmq
+    - eureka-server
+  web-service-2:
+    image: gestion_mails
+    ports:
+    - 8762:8762
+    links:
+    - api-database
+    - rabbitmq
+    - eureka-server
+  angular-service:
+    image: webpage
+    ports:
+    - 4200:4200
+    links:
+    - web-service
+    - web-service-2
+    command: > 
+        bash -c "npm install && ng serve --host 0.0.0.0 --port 4200 --prod"
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - 5672:5672
+      - 15672:15672

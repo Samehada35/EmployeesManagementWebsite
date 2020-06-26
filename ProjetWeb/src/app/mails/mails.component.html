@@ -1,0 +1,18 @@
+<div>
+    <div class="heading">
+        <h2><i class="fa fa-comments"></i>MAILS</h2>
+    </div>
+    <div class="comments-approval">
+        <ul class="bxslider">
+            <li *ngFor="let mail of mails">
+                <div class="author clearfix">
+                    <p class="left">{{getEmployeNameByMat(mail["matriculeEmp"])}}<br><span>{{mail["date_envoi"]["jour"]+"/"+mail["date_envoi"]["mois"]+"/"+mail["date_envoi"]["annee"]+" a "+mail["date_envoi"]["heure"]+":"+mail["date_envoi"]["minute"]}}</span><br>{{mail["objet"]}}</p>
+                    <div class="right">
+                        <button class="delete" style="background-color: transparent;font-size:20px" (click)="onDeleteMail(mail['idMail'])"><i class="fa fa-times" style="color:#e67373"></i></button>
+                    </div>
+                </div>
+                <p>{{mail["contenu"]}}</p>
+            </li>
+        </ul>
+    </div>
+</div>

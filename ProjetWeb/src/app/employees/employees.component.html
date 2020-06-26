@@ -1,0 +1,74 @@
+<div>
+    <div class="heading clearfix">
+        <h2><i class="fa fa-user"></i>Gestion : </h2>
+        <select class="chosen-select" style="width: 175px" [(ngModel)]="selectedGestion">
+            <option value="EMPLOYES">Employes</option>
+            <option value="CONGES">Congés</option>
+            <option value="ABSENCES">Absences</option>
+        </select>
+        <ng-container *ngIf="selectedGestion === 'EMPLOYES'">
+            <h2><i class="fa fa-user"></i>Filtrer par : </h2>
+            <select class="chosen-select" style="width: 175px" [(ngModel)]="selectedState">
+                <option value="*">Tous</option>
+                <option value="ACTIF">actifs</option>
+                <option value="RETRAITE">retraites</option>
+                <option value="EN_CONGES">en conges</option>
+                <option value="SUSPENDU">suspendus</option>
+                <option value="LICENCIE">licencies</option>
+                <option value="MIS_EN_DISPONIBILITE">mis en disponibilite</option>
+            </select>
+        </ng-container>
+    </div>
+    <table class="adm-table">
+        <ng-container *ngIf="selectedGestion=='EMPLOYES'">
+            <tr>
+            <td colspan="2" style="font-weight: normal">Ajouter un nouvel employe : <button (click)="onNewEmploye()" style="font-size:30px;background-color:transparent">+</button></td>
+            </tr>
+            <tr *ngFor="let employe of employes; let i=index">
+                <ng-container *ngIf="selectedState=='*'||selectedState==employe['etat']">
+                    <td>{{i+1}}</td>
+                    <td>
+                        <img src="assets/images/avatar{{employe['sexe']=='HOMME'?1:2}}.jpg" alt="img" class="avatar">
+                        <p><a (click)="onDisplayEmploye(employe['matricule'])">{{employe["nomEmp"]+" "+employe["prenomEmp"]}}</a><br><span>{{employe["fonction"]}}</span></p>
+                    </td>
+                    <td>Recruté le <span class="date">{{employe["date_recrutement"]["jour"]+"/"+employe["date_recrutement"]["mois"]+"/"+employe["date_recrutement"]["annee"]}}</span></td>
+                    <td>
+                        <button style="background-color: transparent;font-size: 20px" (click)="onDeleteEmploye(employe['matricule'])"><i class="fa fa-times" style="color: #e67373"></i></button>
+                    </td>
+                </ng-container>
+            </tr>
+        </ng-container>
+        <ng-container *ngIf="selectedGestion=='ABSENCES'">
+            <tr>
+            <td colspan="2" style="font-weight: normal">Ajouter une nouvelle absence : <button (click)="onNewAbsence()"  style="font-size:30px;background-color:transparent">+</button></td>
+            </tr>
+            <tr *ngFor="let absence of absences; let i=index">
+                <td>{{i+1}}</td>
+                <td>
+                    <img src="assets/images/avatar{{getEmployeSexeFromMat(absence['matriculeEmp'])=='HOMME'?1:2}}.jpg" alt="img" class="avatar">
+                    <p>{{getEmployeNomFromMat(absence["matriculeEmp"])}}<br><span></span></p>
+                </td>
+                <td>Absent du <span class="date">{{absence["dateDebAbsence"]["jour"]+"/"+absence["dateDebAbsence"]["mois"]+"/"+absence["dateDebAbsence"]["annee"]}}</span> au <span class="date">{{absence["dateFinAbsence"]["jour"]+"/"+absence["dateFinAbsence"]["mois"]+"/"+absence["dateFinAbsence"]["annee"]}}</span></td>
+                <td>
+                    <button style="background-color: transparent;font-size: 20px"><i class="fa fa-times" style="color: #e67373"></i></button>
+                </td>
+            </tr>
+        </ng-container>
+        <ng-container *ngIf="selectedGestion=='CONGES'">
+            <tr>
+            <td colspan="2" style="font-weight: normal">Ajouter un nouveau conges : <button  (click)="onNewConges()" style="font-size:30px;background-color:transparent">+</button></td>
+            </tr>
+            <tr *ngFor="let conges of conges; let i=index">
+                <td>{{i+1}}</td>
+                <td>
+                    <img src="assets/images/avatar{{getEmployeSexeFromMat(conges['matriculeEmp'])=='HOMME'?1:2}}.jpg" alt="img" class="avatar">
+                    <p>{{getEmployeNomFromMat(conges["matriculeEmp"])}}<br><span></span></p>
+                </td>
+                <td>Conges du <span class="date">{{conges["dateDebConges"]["jour"]+"/"+conges["dateDebConges"]["mois"]+"/"+conges["dateDebConges"]["annee"]}}</span> au <span class="date">{{conges["dateFinConges"]["jour"]+"/"+conges["dateFinConges"]["mois"]+"/"+conges["dateFinConges"]["annee"]}}</span></td>
+                <td>
+                    <button style="background-color: transparent;font-size: 20px"><i class="fa fa-times" style="color: #e67373"></i></button>
+                </td>
+            </tr>
+        </ng-container>
+    </table>
+</div>

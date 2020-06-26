@@ -1,0 +1,32 @@
+docker-machine create default --virtualbox-no-vtx-check
+
+SET DOCKER_TLS_VERIFY=1
+SET DOCKER_HOST=tcp://192.168.99.100:2376
+SET DOCKER_CERT_PATH=C:\Users\Samy\.docker\machine\machines\default
+SET DOCKER_MACHINE_NAME=default
+SET COMPOSE_CONVERT_WINDOWS_PATHS=true
+REM Run this command to configure your shell:
+REM     @FOR /f "tokens=*" %i IN ('docker-machine env') DO @%i
+
+
+gradlew build
+docker build -t gestion_personnel .
+docker build -t gestion_mails .
+docker build -t serveur_eureka .
+docker build -t webpage .
+docker-compose rm -v
+docker-compose build
+docker-compose up
+docker stack deploy --compose-file docker-compose.yml gp_app
+
+spring.data.mongodb.authentication-database=admin
+spring.data.mongodb.database=employe_db
+spring.data.mongodb.host=localhost
+spring.data.mongodb.password=root
+spring.data.mongodb.port=27017
+spring.data.mongodb.repositories.enabled=true
+spring.data.mongodb.uri=mongodb://root:root@localhost:27017/employe_db?authSource=admin&authMechanism=SCRAM-SHA-1
+spring.data.mongodb.username=root
+
+logging.level.org.springframework.data=debug
+logging.level.=error
